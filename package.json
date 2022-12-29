@@ -1,20 +1,20 @@
 {
-  "name": "statelibrary",
+  "name": "@lmajer/react-state-library",
   "version": "0.0.1",
   "description": "state management library for Bachelor work",
   "scripts": {
     "build": "webpack --config webpack.config.js"
   },
-  "author": "",
+  "author": "lmajer",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
     "@babel/preset-react": "^7.12.10",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "style-loader": "^2.0.0",
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.1"
@@ -27,5 +27,11 @@
   "module": "dist/esm/index.js",
   "files": [
     "dist"
-  ]
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/lmajer"
+  },
+  "dependencies": {
+    "@lmajer/react-state-library": "^0.0.1"
+  }
 }

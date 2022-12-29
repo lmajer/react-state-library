@@ -1,20 +1,15 @@
 import React, {useMemo, useState} from 'react';
-import {renderToReadableStream} from "react-dom/server";
-
-class EventEmitter extends EventTarget {
-    emit(stateKey) {
-        this.dispatchEvent(new Event(stateKey))
-    }
-}
 const createGlobalStore = (initialState = {}) => {
-    const emitter = new EventEmitter();
-
+    const EventEmitter = require('events');
+    const eventEmitter = new EventEmitter();
     return (stateKey) => {
-        const [count, setCount] = useState();
+
+        const [, setCount] = useState(0);
+        const forceUpdate = () => setCount((c) => c+1);
 
         useMemo(() => {
-            emitter.addEventListener(stateKey, () => {
-                setCount((a) => a+1);
+            eventEmitter.on(stateKey, () => {
+                forceUpdate();
             });
         }, [stateKey]);
 
@@ -22,7 +17,7 @@ const createGlobalStore = (initialState = {}) => {
             initialState[stateKey],
             (setStoreState) => {
                 initialState[stateKey] = setStoreState(initialState[stateKey]);
-                emitter.emit(stateKey);
+                eventEmitter.emit(stateKey)
             }
         ]
     }
